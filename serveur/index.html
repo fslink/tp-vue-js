@@ -1,0 +1,33 @@
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<h1>Hello World</h1>
+	<form>
+		<input type="text" id="m" placeholder="fucking fuck">
+		<input type="submit">
+	</form>
+	<ul id="messages"></ul>
+	<script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+	<script src="/socket.io/socket.io.js"></script>
+	<script>
+	//define the pseudo
+	var socket = io();
+	var pseudo = prompt('Quel est votre pseudo')
+	socket.emit('nouvelle_couillasse', pseudo)
+	//display messages
+	$(function () {
+    $('form').submit(function(){
+      socket.emit('chat message', $('#m').val());
+      $('#m').val('');
+      return false;
+    });
+    socket.on('chat message', function(msg, pseudo){
+      $('#messages').append($('<li>').text(pseudo + ': ' + msg));
+    });
+  });
+	</script>
+</body>
+</html>
