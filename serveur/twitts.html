@@ -1,0 +1,21 @@
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title>Twitts</title>
+</head>
+<body>
+	<ul id="messages"></ul>
+	<script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+	<script src="/socket.io/socket.io.js"></script>
+	<script>
+	//define the pseudo
+	var socket = io();
+	$(function () {
+    	socket.on('twittos', function(msg){
+      		$('#messages').prepend($('<li>').text(msg.text));
+      		console.log(msg.text)
+    	});
+  	});
+	</script>
+</body>
+</html>
